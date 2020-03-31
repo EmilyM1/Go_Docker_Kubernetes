@@ -23,7 +23,7 @@ Have go installed on your system first and run it to ensure there are no errors.
    docker pull <yourDockerHubUserName>/gowebserverproject:latest
 
 7. Run the container to ensure you see the Hello output.
-   docker run -i -t -p8080:8081 <yourDockerHubUserName/gowebserverproject:latest
+   docker run -i -t -p8080:8081 <yourDockerHubUserName>/gowebserverproject:latest
 
 8. Now for Kubernetes. Have minikube installed.
 
