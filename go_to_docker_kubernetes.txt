@@ -1,0 +1,44 @@
+This is how you take a small server and make a Docker container of it then run the container on Minikube.
+
+1. Take the contents of the file called goWebServer.go make a file with it goWebServer.go
+
+Have go installed on your system first and run it to ensure there are no errors.
+
+  go run goWebServer.go
+
+2. Take the contents of the file called Dockerfile and name it Dockerfile. This is in the same directory.
+
+3. Log into docker in your terminal.
+
+   docker login -u <yourDockerHubUserName>
+
+4. Now to build the Dockerfile to ensure it runs and there are no errors in the Dockerfile.
+
+   docker build -t <yourDockerHubUserName>/gowebserverproject:latest .
+
+5. Now to push this to your DockerHub repo. This will be visible in your UI and public on your repo at hub.docker.com so you know.
+   docker push <yourDockerHubUserName>/gowebserverproject:latest
+
+6. Pull the repo local
+   docker pull <yourDockerHubUserName>/gowebserverproject:latest
+
+7. Run the container to ensure you see the Hello output.
+   docker run -i -t -p8080:8081 <yourDockerHubUserName/gowebserverproject:latest
+
+8. Now for Kubernetes. Have minikube installed.
+
+9. Create your Deployment
+  kubectl create deployment gowebserver --image=<yourDockerHubUserName>/gowebserverproject:latest
+
+10. Check to ensure the pod is there and created properly.
+  kubectl get pods
+
+11. Expose your service.
+  kubectl expose deployment gowebserver --type=LoadBalancer --port=8081
+
+12. Start you application.
+  minikube service gowebserver
+
+13. Cntrl C out of everywhere and run kubectl delete service gowebserver
+
+14. If you'd like to re run this since your Deployment is there check that your pod is there and then run thru steps 11 and 12.
